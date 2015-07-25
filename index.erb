@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+  <div class="control-group">
+    <a href="/records/new" class="btn btn-primary">Add record</a>
+  </div>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Created</th>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |record| %>
+      <tr>
+        <td><%= record[:id] %></td>
+        <td><%= pretty_date(record[:created_at] %></td>
+        <td><%= record[:temperature] %></td>
+        <td><%= record[:humidity] %></td>
+        <td><%= record[:content] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
