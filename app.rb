@@ -5,6 +5,7 @@ require 'dm-migrations'
 require 'sinatra/flash'
 
 enable :sessions
+set :port,  4567
 
 configure :development do
   DataMapper.setup(
@@ -13,7 +14,7 @@ configure :development do
 end
 
 configure :production do
-  DataMapper.setup (
+  DataMapper.setup(
     :default, 'postgres://postgres:123@localhost/sinatra_service'
   )
 end
