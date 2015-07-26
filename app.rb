@@ -8,7 +8,7 @@ enable :sessions
 
 configure :development do
   DataMapper.setup(
-    :default, 'postgres://user:pi@localhost/test'
+    :default, "postgres://pi:{#ENV['PGPW']}@localhost/test"
   )
 end
 
