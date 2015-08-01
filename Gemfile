@@ -1,7 +1,6 @@
 source :rubygems
  
 gem "sinatra"
-gem "sqlite3"
 gem "datamapper"
 gem "dm-sqlite-adapter"
 gem "dm-postgres-adapter"
