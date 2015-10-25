@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'json'
 require "sinatra"
 require "data_mapper"
@@ -5,7 +6,10 @@ require 'dm-migrations'
 require 'sinatra/flash'
 require 'json'
 
-enable :sessions
+
+configure do
+  enable :sessions
+end
 
 set :bind, '0.0.0.0'
 
@@ -36,12 +40,32 @@ DataMapper.finalize
 Weather.auto_upgrade!
 
 get '/' do
-  puts 'hell, jars'
+  @records = Weather.all(:order => :created_at.desc)
+  erb :"index"
 end
 
 get "/records" do
   @records = Weather.all(:order => :created_at.desc)
   erb :"weather/index"
+end
+
+get '/login/form' do
+  erb :login_form
+end
+
+post '/login/attempt' do
+  session[:identity] = params['username']
+  where_user_came_from = session[:previous_url] || '/'
+  redirect to where_user_came_from
+end
+
+get '/logout' do
+  session.delete(:identity)
+  erb "<div class='alert alert-message'>Logged out</div>"
+end
+
+get '/secure/place' do
+  erb 'This is a secret place that only <%=session[:identity]%> has access to!'
 end
 
 post '/record' do
@@ -55,4 +79,8 @@ post '/record' do
   record.to_json
 end
 
-
+helpers do
+  def to_fahrenheit(temp)
+    temp.to_f * 9 / 5 + 32
+  end
+end
