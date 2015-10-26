@@ -42,7 +42,7 @@ Weather.auto_upgrade!
 
 get '/' do
   # @records = Weather.all(:order => :created_at.desc)
-  @records = Weather.paginate(:page => params[:page], :per_page => 30)
+  @records = Weather.all(:order => :created_at.desc).paginate(:page => params[:page], :per_page => 30)
   erb :"index"
 end
 
