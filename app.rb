@@ -41,8 +41,9 @@ DataMapper.finalize
 Weather.auto_upgrade!
 
 get '/' do
-  # @records = Weather.all(:order => :created_at.desc)
-  @records = Weather.all(:order => :created_at.desc).paginate(:page => params[:page], :per_page => 30)
+   @records = Weather.all(:order => :created_at.desc)
+  
+  #@records = Weather.all(:order => :created_at.desc).paginate(:page => params[:page], :per_page => 30)
   erb :"index"
 end
 
@@ -83,6 +84,6 @@ end
 
 helpers do
   def to_fahrenheit(temp)
-    temp.to_f * 9 / 5 + 32
+    temp.to_f * 9 / 5 + 32.round(2)
   end
 end

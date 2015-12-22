@@ -24,7 +24,7 @@ url = get_ip_address('wlan0')
 my_url = "http://%(url)s:4567/record" % locals()
 #data = json.dumps({"content": "json from pi", "temperature": "\n#{temp}", "humidity": "\n{humid}"})
 
-data = json.dumps({"content": "%(dow)s | json from pi", "temperature": "%(temp)s", "humidity": "%(humid)s"}) % {"dow" : dow, "humid" : '{:3.2f}'.format(s.humidity() / 1.), "temp" : '{:3.2f}'.format(s.temperature() / 1.)}
+data = json.dumps({"content": "inside for upgrade", "temperature": "%(temp)s", "humidity": "%(humid)s"}) % {"dow" : dow, "humid" : '{:3.2f}'.format(s.humidity() / 1.), "temp" : '{:3.2f}'.format(s.temperature() / 1.)}
 req = requests.post(my_url, data)
 print req.json
 #print('{:3.2f}'.format(s.humidity() / 1.))
