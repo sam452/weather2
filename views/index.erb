@@ -8,16 +8,20 @@
       <th>Created</th>
       <th>Temperature</th>
       <th>Humidity</th>
-      <th>Content</th>
+      <th>Rain total</th>
+      <th>Wind direction</th>
+      <th>Wind speed</th>
     </tr>
   </thead>
   <tbody>
     <% @records.each do |record| %>
       <tr>
-        <td><%= record[:created_at].strftime('%m/%d/%y %I:%M:%S %p') %></td>
-        <td><%= to_fahrenheit(record[:temperature]) %></td>
-        <td><%= record[:humidity] %></td>
-        <td><%= record[:content] %></td>
+        <td><%= record[:timestamp].strftime('%m/%d/%y %I:%M:%S %p') %></td>
+        <td><%= to_fahrenheit(record[:bmp180temperature]) %></td>
+        <td><%= record[:insidehumidity] %></td>
+        <td><%= record[:totalrain] %></td>
+        <td><%= record[:currentwinddirection] %></td>
+        <td><%= record[:currentWindSpeed] %></td>
       </tr>
     <% end %>
   </tbody>

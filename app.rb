@@ -30,11 +30,12 @@ end
 class Weather
   include DataMapper::Resource
   property :id,  Serial
-  property :content, String
-  property :temperature, String
-  property :humidity, String
-  property :completed_at, DateTime
-  property :created_at, DateTime
+  property :bmp180temperature, String
+  property :insidehumidity, String
+  property :totalrain, String
+  property :currentwinddirection, String
+  property :currentWindSpeed, String
+  property :timestamp, DateTime
 end
 
 DataMapper.finalize
