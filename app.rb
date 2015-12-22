@@ -30,26 +30,25 @@ end
 class Weather
   include DataMapper::Resource
   property :id,  Serial
-  property :bmp180temperature, String
-  property :insidehumidity, String
-  property :totalrain, String
-  property :currentwinddirection, String
-  property :currentWindSpeed, String
-  property :timestamp, DateTime
+  property :content, String
+  property :temperature, String
+  property :humidity, String
+  property :completed_at, DateTime
+  property :created_at, DateTime
 end
 
 DataMapper.finalize
 Weather.auto_upgrade!
 
 get '/' do
-   @records = Weather.all(:order => :created_at.desc)
+   @records = Weather.all(:order => :timestamp.desc)
   
   #@records = Weather.all(:order => :created_at.desc).paginate(:page => params[:page], :per_page => 30)
   erb :"index"
 end
 
 get "/records" do
-  @records = Weather.all(:order => :created_at.desc)
+  @records = Weather.all(:order => :timestamp.desc)
   erb :"weather/index"
 end
 
