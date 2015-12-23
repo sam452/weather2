@@ -16,7 +16,7 @@
   <tbody>
     <% @records.each do |record| %>
       <tr>
-        <td><%= record[:timestamp].strftime('%m/%d/%y %I:%M:%S %p') %></td>
+        <td><%= to_central(record[:timestamp]).strftime('%m/%d/%y %I:%M:%S %p') %></td>
         <td><%= to_fahrenheit(record[:bmp180temperature]) %></td>
         <td><%= record[:insidehumidity] %></td>
         <td><%= record[:totalrain] %></td>

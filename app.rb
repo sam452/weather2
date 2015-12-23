@@ -7,6 +7,8 @@ require 'sinatra/flash'
 require 'json'
 require 'will_paginate'
 require 'will_paginate/data_mapper'
+require 'time'
+require 'date'
 
 configure do
   enable :sessions
@@ -86,5 +88,11 @@ end
 helpers do
   def to_fahrenheit(temp)
     temp.to_f * 9 / 5 + 32.round(2)
+  end
+
+  def to_central(time)
+    string_time = Time.parse(time.to_s)
+    offset = -6
+    string_time + offset * 3600
   end
 end
