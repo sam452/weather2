@@ -92,7 +92,7 @@ helpers do
 
   def to_central(time)
     string_time = Time.parse(time.to_s)
-    offset = 1
+    offset = -1
     string_time + offset * 3600
   end
 end
