@@ -18,13 +18,13 @@ set :bind, '0.0.0.0'
 
 configure :development do
   DataMapper.setup(
-    :default, "postgres://pi:0@localhost/postgres"
+    :default, "postgres://wanzie@localhost/weathers"
   )
 end
 
 configure :production do
   DataMapper.setup(
-    :default, 'postgres://postgres:123@localhost/sinatra_service'
+    :default, 'postgres://wanzie@localhost/weathers'
   )
 end
 
@@ -37,6 +37,11 @@ class Weather
   property :totalrain, String
   property :currentwinddirection, String
   property :currentwindspeed, String
+  property :currentwindgust, String
+  property :bmp180temperature, String
+  property :bmp180pressure, String
+  property :bmp180altitude, String
+  property :bmp180sealevel, String
   property :timestamp, DateTime
 end
 
@@ -77,9 +82,9 @@ end
 post '/record' do
   body = JSON.parse request.body.read
     record = Weather.create(
-    content: body['content'],
-    temperature: body['temperature'],
-    humidity: body['humidity']
+    currentwindspeed: body['currentWindSpeed'],
+    outsidetemperature: body['outsideTemperature'],
+    outsidehumidity: body['outsideHumidity']
     )
   status 201
   record.to_json
