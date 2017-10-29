@@ -84,7 +84,13 @@ post '/record' do
     record = Weather.create(
     currentwindspeed: body['currentWindSpeed'],
     outsidetemperature: body['outsideTemperature'],
-    outsidehumidity: body['outsideHumidity']
+    outsidehumidity: body['outsideHumidity'],
+    totalrain: body['totalRain'],
+    currentwinddirection: body['currentwinddirection'],
+    currentwindgust: body['currentWindGust'],
+    bmp180temperature: body['bmp180Temperature'],
+    bmp180pressure: body['bmp180Pressure'],
+    bmp180altitude: body['bmp180Altitude']
     )
   status 201
   record.to_json
