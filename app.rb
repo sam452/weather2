@@ -18,13 +18,13 @@ set :bind, '0.0.0.0'
 
 configure :development do
   DataMapper.setup(
-    :default, "postgres://wanzie@localhost/weathers"
+    :default, "postgres://sam@localhost/weathers"
   )
 end
 
 configure :production do
   DataMapper.setup(
-    :default, 'postgres://wanzie@localhost/weathers'
+    :default, 'postgres://sam@localhost/weathers'
   )
 end
 
@@ -45,6 +45,15 @@ class Weather
   property :timestamp, DateTime
 end
 
+class System
+  include DataMapper::Resource
+  property :id, Serial
+  property :timestamp, DateTime
+  property :level, String
+  property :source, String
+  property :message, String
+end
+
 DataMapper.finalize
 Weather.auto_upgrade!
 
@@ -53,6 +62,11 @@ get '/' do
   
   #@records = Weather.all(:order => :created_at.desc).paginate(:page => params[:page], :per_page => 30)
   erb :"index"
+end
+
+get '/sys' do
+  @sysrecords = System.all(:limit => 100, :order => :timestamp.desc)
+  erb :"system"
 end
 
 get "/records" do
@@ -95,6 +109,18 @@ post '/record' do
   status 201
   record.to_json
 end
+
+post '/sysrecord' do
+  body = JSON.parse request.body.read
+  sysrecord = System.create(
+    level: body['level'],
+    source: body['source'],
+    message: body['message']
+    )
+  status 201
+  record.to_json
+end
+
 
 helpers do
   def to_fahrenheit(temp)

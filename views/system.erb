@@ -1,0 +1,22 @@
+
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <th>Created</th>
+      <th>Level</th>
+      <th>Source</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sysrecords.each do |record| %>
+      <tr>
+        <td><%= record[:timestamp].strftime('%m/%d/%y %I:%M:%S %p') %></td>
+        <td><%= record[:level] %></td>
+        <td><%= record[:souce] %></td>
+        <td><%= record[:message] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
